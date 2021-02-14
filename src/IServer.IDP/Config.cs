@@ -39,6 +39,10 @@ namespace IServer.IDP
                       IdentityServerConstants.StandardScopes.OpenId,
                       IdentityServerConstants.StandardScopes.Profile
                    },
+                   PostLogoutRedirectUris = new List<string>()
+                   {
+                       "https://localhost:44389/signout-callback-oidc"
+                   },
                    ClientSecrets =
                    {
                        new Secret("secret".Sha256())
