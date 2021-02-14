@@ -29,6 +29,7 @@ namespace IServer.IDP
                    ClientName = "Image Gallery",
                    ClientId = "imagegalleryclient",
                    AllowedGrantTypes = GrantTypes.Code,
+                   RequirePkce = true,
                    RedirectUris = new List<string>()
                    {
                        "https://localhost:44389/signin-oidc"
@@ -41,8 +42,7 @@ namespace IServer.IDP
                    ClientSecrets =
                    {
                        new Secret("secret".Sha256())
-                   },
-                   RequirePkce = false,
+                   }
                }
             };
     }
