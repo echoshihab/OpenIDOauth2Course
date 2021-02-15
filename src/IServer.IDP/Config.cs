@@ -14,7 +14,8 @@ namespace IServer.IDP
             new IdentityResource[]
             { 
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResources.Address()
             };
 
         public static IEnumerable<ApiResource> Apis =>
@@ -37,7 +38,8 @@ namespace IServer.IDP
                    AllowedScopes =
                    {
                       IdentityServerConstants.StandardScopes.OpenId,
-                      IdentityServerConstants.StandardScopes.Profile
+                      IdentityServerConstants.StandardScopes.Profile,
+                      IdentityServerConstants.StandardScopes.Address
                    },
                    PostLogoutRedirectUris = new List<string>()
                    {

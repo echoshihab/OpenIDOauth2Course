@@ -36,6 +36,13 @@ namespace ImageGallery.Client
                 client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
             });
 
+            services.AddHttpClient("IDPClient", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:44318");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
+            });
+
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -48,15 +55,11 @@ namespace ImageGallery.Client
                     options.Authority = "https://localhost:44318/";
                     options.ClientId = "imagegalleryclient";
                     options.ResponseType = "code";
-                    //options.UsePkce = false;
-                    //options.CallbackPAth = new PathString("...");
-                    //options.ClaimActions.Remove("nbf"); this adds to claims
                     options.ClaimActions.DeleteClaim("sid");
                     options.ClaimActions.DeleteClaim("idp");
                     options.ClaimActions.DeleteClaim("s_hash");
-                    options.ClaimActions.DeleteClaim("auth_time");
-                    options.Scope.Add("openid");
-                    options.Scope.Add("profile");
+                    options.ClaimActions.DeleteClaim("auth_time");                  
+                    options.Scope.Add("address");
                     options.SaveTokens = true;
                     options.ClientSecret = "secret";
                     options.GetClaimsFromUserInfoEndpoint = true;
