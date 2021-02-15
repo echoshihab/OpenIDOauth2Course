@@ -55,10 +55,12 @@ namespace ImageGallery.Client
                     options.Authority = "https://localhost:44318/";
                     options.ClientId = "imagegalleryclient";
                     options.ResponseType = "code";
+                    options.Scope.Add("roles");
                     options.ClaimActions.DeleteClaim("sid");
                     options.ClaimActions.DeleteClaim("idp");
                     options.ClaimActions.DeleteClaim("s_hash");
-                    options.ClaimActions.DeleteClaim("auth_time");                  
+                    options.ClaimActions.DeleteClaim("auth_time");
+                    options.ClaimActions.MapUniqueJsonKey("role", "role");
                     options.Scope.Add("address");
                     options.SaveTokens = true;
                     options.ClientSecret = "secret";
