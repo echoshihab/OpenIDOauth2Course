@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Logging;
 
 namespace IServer.IDP
 {
@@ -25,8 +26,9 @@ namespace IServer.IDP
             services.AddControllersWithViews();
 
             var builder = services.AddIdentityServer()
+                .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryIdentityResources(Config.IdentityResources)
-                .AddInMemoryApiResources(Config.Apis)
+                .AddInMemoryApiResources(Config.ApiResources)
                 .AddInMemoryClients(Config.Clients)
                 .AddTestUsers(TestUsers.Users);
 
@@ -36,8 +38,10 @@ namespace IServer.IDP
 
         public void Configure(IApplicationBuilder app)
         {
+           
             if (Environment.IsDevelopment())
             {
+                
                 app.UseDeveloperExceptionPage();
             }
 

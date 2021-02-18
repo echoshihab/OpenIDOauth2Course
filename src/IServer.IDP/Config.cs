@@ -12,7 +12,7 @@ namespace IServer.IDP
     {
         public static IEnumerable<IdentityResource> IdentityResources =>
             new IdentityResource[]
-            { 
+            {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 new IdentityResources.Address(),
@@ -22,9 +22,26 @@ namespace IServer.IDP
                     new List<string>(){"role"})
             };
 
-        public static IEnumerable<ApiResource> Apis =>
-            new ApiResource[]
-            { };
+
+
+        public static IEnumerable<ApiScope> ApiScopes =>
+        new ApiScope[]
+        {
+            new ApiScope
+            (  "imagegalleryapi",
+                "Image Gallery API scope")
+
+        };
+
+        public static IEnumerable<ApiResource> ApiResources =>
+        new ApiResource[]
+        {
+              new ApiResource("imagegalleryapi", "Image Gallery API")
+              {
+                  Scopes={"imagegalleryapi"},
+                  ApiSecrets = {new Secret("apisecret".Sha256()) }
+              }
+            };
 
         public static IEnumerable<Client> Clients =>
             new Client[] 
@@ -44,7 +61,8 @@ namespace IServer.IDP
                       IdentityServerConstants.StandardScopes.OpenId,
                       IdentityServerConstants.StandardScopes.Profile,
                       IdentityServerConstants.StandardScopes.Address,
-                      "roles"
+                      "roles",
+                      "imagegalleryapi"
                    },
                    PostLogoutRedirectUris = new List<string>()
                    {
