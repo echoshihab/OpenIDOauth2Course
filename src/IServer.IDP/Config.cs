@@ -19,7 +19,15 @@ namespace IServer.IDP
                 new IdentityResource(
                     "roles",
                     "Your role(s)",
-                    new List<string>(){"role"})
+                    new List<string>(){"role"}),
+                new IdentityResource(
+                    "country",
+                    "The country you're living in",
+                    new List<string>() {"country"}),
+                new IdentityResource(
+                    "subscriptionlevel",
+                    "your subscription level",
+                    new List<string>(){"subscriptionlevel"})
             };
 
 
@@ -64,7 +72,9 @@ namespace IServer.IDP
                       IdentityServerConstants.StandardScopes.Profile,
                       IdentityServerConstants.StandardScopes.Address,
                       "roles",
-                      "imagegalleryapi"
+                      "imagegalleryapi",
+                      "country",
+                      "subscriptionlevel"
                    },
                    PostLogoutRedirectUris = new List<string>()
                    {
