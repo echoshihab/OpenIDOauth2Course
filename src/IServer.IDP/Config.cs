@@ -36,7 +36,9 @@ namespace IServer.IDP
         public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
         {
-              new ApiResource("imagegalleryapi", "Image Gallery API")
+              new ApiResource("imagegalleryapi", 
+                  "Image Gallery API",
+                  new List<string>() {"role" })
               {
                   Scopes={"imagegalleryapi"},
                   ApiSecrets = {new Secret("apisecret".Sha256()) }
