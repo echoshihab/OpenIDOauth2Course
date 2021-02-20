@@ -58,6 +58,7 @@ namespace IServer.IDP
             { 
                new Client
                {
+                   AccessTokenType = AccessTokenType.Reference,
                    AccessTokenLifetime  = 120,
                    AllowOfflineAccess = true, //requirement for refresh token
                    UpdateAccessTokenClaimsOnRefresh = true,
