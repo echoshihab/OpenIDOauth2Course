@@ -58,6 +58,9 @@ namespace IServer.IDP
             { 
                new Client
                {
+                   AccessTokenLifetime  = 120,
+                   AllowOfflineAccess = true, //requirement for refresh token
+                   UpdateAccessTokenClaimsOnRefresh = true,
                    ClientName = "Image Gallery",
                    ClientId = "imagegalleryclient",
                    AllowedGrantTypes = GrantTypes.Code,
