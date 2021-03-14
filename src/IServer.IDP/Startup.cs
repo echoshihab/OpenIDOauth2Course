@@ -5,6 +5,7 @@
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using IdentityServerHost.Quickstart.UI;
+using IServer.IDP.DbContexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,10 @@ namespace IServer.IDP
 
             // uncomment, if you want to add an MVC-based UI
             services.AddControllersWithViews();
+            services.AddDbContext<IdentityDbContext>(options =>
+            {
+                options.UseSqlServer(iserverIDPDataDBConnectionString);
+            });
 
             var builder = services.AddIdentityServer()
                 //.AddInMemoryApiScopes(Config.ApiScopes)
