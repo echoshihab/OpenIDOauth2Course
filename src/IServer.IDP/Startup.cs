@@ -6,6 +6,7 @@ using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using IdentityServerHost.Quickstart.UI;
 using IServer.IDP.DbContexts;
+using IServer.IDP.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -42,12 +43,15 @@ namespace IServer.IDP
                 options.UseSqlServer(iserverIDPDataDBConnectionString);
             });
 
-            var builder = services.AddIdentityServer()
-                //.AddInMemoryApiScopes(Config.ApiScopes)
-                //.AddInMemoryIdentityResources(Config.IdentityResources)
-                //.AddInMemoryApiResources(Config.ApiResources)
-                //.AddInMemoryClients(Config.Clients)
-                .AddTestUsers(TestUsers.Users);
+            services.AddScoped<ILocalUserService, LocalUserService>();
+
+            var builder = services.AddIdentityServer();
+            //.AddInMemoryApiScopes(Config.ApiScopes)
+            //.AddInMemoryIdentityResources(Config.IdentityResources)
+            //.AddInMemoryApiResources(Config.ApiResources)
+            //.AddInMemoryClients(Config.Clients)
+            builder.AddProfileService<LocalUserProfileService>();
+
 
             // not recommended for production - you need to store your key material somewhere secure
             //builder.AddDeveloperSigningCredential();

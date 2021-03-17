@@ -29,6 +29,9 @@ namespace IServer.IDP.Entities
 
         public ICollection<UserClaim> Claims { get; set; } = new List<UserClaim>();
 
- 
+        internal object toList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
