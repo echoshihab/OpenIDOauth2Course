@@ -4,14 +4,16 @@ using ImageGallery.API.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ImageGallery.API.Migrations
 {
     [DbContext(typeof(GalleryContext))]
-    partial class GalleryContextModelSnapshot : ModelSnapshot
+    [Migration("20210319154332_applicationuserpfoile")]
+    partial class applicationuserpfoile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,20 +40,6 @@ namespace ImageGallery.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ApplicationUserProfiles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("7f8ce18c-d156-4c85-9575-56bf59938b0c"),
-                            Subject = "d860efca-22d9-47fd-8249-791ba61b07c7",
-                            SubscriptionLevel = "FreeUser"
-                        },
-                        new
-                        {
-                            Id = new Guid("38ff72e7-834a-4f5d-a0d1-acfaffad05c2"),
-                            Subject = "b7539694-97e7-4dfe-84da-b4256e1ff5c7",
-                            SubscriptionLevel = "PayingUser"
-                        });
                 });
 
             modelBuilder.Entity("ImageGallery.API.Entities.Image", b =>

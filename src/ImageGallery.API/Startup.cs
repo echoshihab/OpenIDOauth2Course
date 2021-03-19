@@ -11,8 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Logging;
 using System;
 
 namespace ImageGallery.API
@@ -33,6 +31,7 @@ namespace ImageGallery.API
                      .AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddHttpContextAccessor();
             services.AddScoped<IAuthorizationHandler, MustOwnImageHandler>();
+            services.AddScoped<IAuthorizationHandler, SubjectMustMatchUserHandler>();
             services.AddAuthorization(authorizationOptions =>
             {
                 authorizationOptions.AddPolicy(
@@ -42,6 +41,23 @@ namespace ImageGallery.API
                         policyBuilder.RequireAuthenticatedUser();
                         policyBuilder.AddRequirements(new MustOwnImageRequirement());
                     });
+
+                authorizationOptions.AddPolicy(
+                  "SubjectMustMatchUser",
+                  policyBuilder =>
+                  {
+                      policyBuilder.RequireAuthenticatedUser();
+                      policyBuilder.AddRequirements(
+                            new SubjectMustMatchUserRequirement());
+                  });
+
+                authorizationOptions.AddPolicy(
+                   "MustBePayingUser",
+                   policyBuilder =>
+                   {
+                       policyBuilder.RequireAuthenticatedUser();
+                       policyBuilder.RequireClaim("subscriptionlevel", "PayingUser");
+                   });
             });
 
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
