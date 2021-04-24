@@ -9,6 +9,7 @@ using IServer.IDP.DbContexts;
 using IServer.IDP.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -43,6 +44,7 @@ namespace IServer.IDP
                 options.UseSqlServer(iserverIDPDataDBConnectionString);
             });
 
+            services.AddScoped<IPasswordHasher<Entities.User>, PasswordHasher<Entities.User>>();
             services.AddScoped<ILocalUserService, LocalUserService>();
 
             var builder = services.AddIdentityServer();

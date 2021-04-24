@@ -8,24 +8,22 @@ using System.Threading.Tasks;
 namespace IServer.IDP.Services
 {
     public interface ILocalUserService
-    { 
-        Task<bool> ValidateClearTextCredentialsAsync(
-            string userName, 
-            string password); 
-        //Task<bool> ValidateCredentialsAsync(
-        //    string userName,
-        //    string password);
+    {
+
+        Task<bool> ValidateCredentialsAsync(
+            string userName,
+            string password);
         Task<IEnumerable<UserClaim>> GetUserClaimsBySubjectAsync(
             string subject);         
         Task<User> GetUserByUserNameAsync(
             string userName);
         Task<User> GetUserBySubjectAsync(
-            string subject);        
-        void AddUser
-            (User userToAdd);    
-        //void AddUser(
-        //    User userToAdd, 
-        //    string password); 
+            string subject);
+        //void AddUser
+        //    (User userToAdd);    
+        void AddUser(
+            User userToAdd,
+            string password);
         Task<bool> IsUserActive(
             string subject);
         //Task<bool> ActivateUser(

@@ -47,7 +47,6 @@ namespace IServer.IDP.UserRegistration
 
             var userToCreate = new Entities.User
             {
-                Password = model.Password,
                 UserName = model.UserName,
                 Subject = Guid.NewGuid().ToString(),
                 Active = true
@@ -77,14 +76,12 @@ namespace IServer.IDP.UserRegistration
                 Value = model.FamilyName
             });
 
-            _localUserService.AddUser(userToCreate);
+            _localUserService.AddUser(userToCreate, model.Password);
             await _localUserService.SaveChangesAsync();
 
             //log the user in
             await HttpContext.SignInAsync(new IdentityServerUser(userToCreate.Subject));
 
-            var interactionValue = _interaction.IsValidReturnUrl(model.ReturnUrl);
-            var localUrlValue = Url.IsLocalUrl(model.ReturnUrl);
 
             if (_interaction.IsValidReturnUrl(model.ReturnUrl) 
                 || Url.IsLocalUrl(model.ReturnUrl))
