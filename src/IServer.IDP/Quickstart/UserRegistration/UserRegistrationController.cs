@@ -81,7 +81,10 @@ namespace IServer.IDP.UserRegistration
             await _localUserService.SaveChangesAsync();
 
             //log the user in
-            await HttpContext.SignInAsync(new IdentityServerUser(userToCreate.UserName));
+            await HttpContext.SignInAsync(new IdentityServerUser(userToCreate.Subject));
+
+            var interactionValue = _interaction.IsValidReturnUrl(model.ReturnUrl);
+            var localUrlValue = Url.IsLocalUrl(model.ReturnUrl);
 
             if (_interaction.IsValidReturnUrl(model.ReturnUrl) 
                 || Url.IsLocalUrl(model.ReturnUrl))
