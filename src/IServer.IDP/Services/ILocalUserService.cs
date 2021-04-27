@@ -26,8 +26,8 @@ namespace IServer.IDP.Services
             string password);
         Task<bool> IsUserActive(
             string subject);
-        //Task<bool> ActivateUser(
-        //    string securityCode);
+        Task<bool> ActivateUser(
+            string securityCode);
         Task<bool> SaveChangesAsync();
         //Task<string> InitiatePasswordResetRequest(
         //    string email);

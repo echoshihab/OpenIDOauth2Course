@@ -63,6 +63,13 @@ namespace IServer.IDP.DbContexts
             {
                 Id = Guid.NewGuid(),
                 UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
+                Type = "email",
+                Value = "frank@someprovider.com"
+            },
+            new UserClaim()
+            {
+                Id = Guid.NewGuid(),
+                UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                 Type = "family_name",
                 Value = "Underwood"
             },
@@ -98,12 +105,20 @@ namespace IServer.IDP.DbContexts
                 Value = "Claire"
             },
 
+            
             new UserClaim()
             {
                 Id = Guid.NewGuid(),
                 UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
                 Type = "family_name",
                 Value = "Underwood"
+            },
+            new UserClaim()
+            {
+                Id = Guid.NewGuid(),
+                UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
+                Type = "email",
+                Value = "claire@someprovider.com"
             },
 
             new UserClaim()
