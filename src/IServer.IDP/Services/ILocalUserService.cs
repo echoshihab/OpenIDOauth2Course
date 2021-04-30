@@ -31,9 +31,9 @@ namespace IServer.IDP.Services
         Task<bool> SaveChangesAsync();
         Task<string> InitiatePasswordResetRequest(
             string email);
-        //Task<bool> SetPassword(
-        //    string securityCode, 
-        //    string password);
+        Task<bool> SetPassword(
+            string securityCode,
+            string password);
         //Task<User> GetUserByExternalProvider(
         //    string provider,
         //    string providerIdentityKey);
