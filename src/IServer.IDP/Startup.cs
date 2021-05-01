@@ -52,12 +52,26 @@ namespace IServer.IDP
             //.AddInMemoryIdentityResources(Config.IdentityResources)
             //.AddInMemoryApiResources(Config.ApiResources)
             //.AddInMemoryClients(Config.Clients)
-            builder.AddProfileService<LocalUserProfileService>();
+            //builder.AddProfileService<LocalUserProfileService>();
 
 
             // not recommended for production - you need to store your key material somewhere secure
             //builder.AddDeveloperSigningCredential();
             builder.AddSigningCredential(LoadCertificateFromStore());
+
+            //configure IIS out of proc settings
+            services.Configure<IISOptions>(iis =>
+            {
+                iis.AuthenticationDisplayName = "Windows";
+                iis.AutomaticAuthentication = false;
+            });
+
+            //or configure IIS in-proc setting
+            services.Configure<IISServerOptions>(iis =>
+            {
+                iis.AuthenticationDisplayName = "Windows";
+                iis.AutomaticAuthentication = false;
+            });
 
             var migrationAssembly = typeof(Startup)
                                             .GetTypeInfo().Assembly.GetName().Name;
@@ -80,9 +94,10 @@ namespace IServer.IDP
         public void Configure(IApplicationBuilder app)
         {
 
+
             if (Environment.IsDevelopment())
             {
-            
+                IdentityModelEventSource.ShowPII = true;
                 app.UseDeveloperExceptionPage();
             }
 
